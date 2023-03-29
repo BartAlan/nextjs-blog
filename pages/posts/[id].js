@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Date from '../../components/date';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
+import Image from 'next/image';
 
 export async function getStaticProps({ params }) {
     // Add the "await" keyword like this:
@@ -30,6 +31,15 @@ export default function Post({ postData }) {
           <title>{postData.title}</title>
         </Head>
         <article>
+          <div className="relative w-full h-32 overflow-hidden">
+            <Image 
+              priority
+              src={postData.image}
+              alt={`Image : ${postData.title}`}
+              fill
+              className="object-cover"
+            />
+          </div>
           <h1 className={utilStyles.headingXl}>{postData.title}</h1>
           <div className={utilStyles.lightText}>
             <Date dateString={postData.date} />
